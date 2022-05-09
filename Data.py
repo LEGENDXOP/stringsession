@@ -22,7 +22,7 @@ You can use me to generate pyrogram and telethon string session. Use the below b
     ]
 
     support_button = [
-        [InlineKeyboardButton("⚜ Support ⚜", url="https://t.me/Trickystarworldchannel")]
+        [InlineKeyboardButton("⚜ Support ⚜", url="https://t.me/mocha_fun_club")]
     ]
 
     # Rest Buttons
