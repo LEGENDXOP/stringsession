@@ -1,3 +1,5 @@
-venv/*
-config.py
-*.session
+.idea/
+__pycache__/
+.gitattributes
+*.pyc
+test.py
