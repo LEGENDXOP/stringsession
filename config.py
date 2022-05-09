@@ -1,23 +1,27 @@
 import os
 
-class Config(object):
-    LOGGER = False
-    # get a token from @BotFather
-    TG_BOT_TOKEN = "5050024245:AAGQDwE2TNRu2CwhcTiZuGPS53EJ2xluHF0"
-    # required for running on Heroku
-    URL = os.environ.get('URL', "")
-    PORT = int(os.environ.get('PORT', 5000))
-    # get a token from ChatBase.com for analytics
-    CBTOKEN = os.environ.get('CBTOKEN', None)
-    # dump channel
-    TG_DUMP_CHANNEL = int(os.environ.get("TG_DUMP_CHANNEL", "0"))
-    #
-    # Get this value from my.telegram.org! Please do not steal
-    APP_ID = 16252641
-    API_HASH = "75fcc910aa8da30d41bf18f13865ba00"
-    # the above example values will no longer work.
-    # changed to List usage to circumvent https://t.me/UniBorg/56
+ENVIRONMENT = os.environ.get('ENVIRONMENT', False)
 
-
-class Development(Config):
-    LOGGER = True
+if ENVIRONMENT:
+    try:
+        API_ID = int(os.environ.get('API_ID', 0))
+    except ValueError:
+        raise Exception("Your API_ID is not a valid integer.")
+    API_HASH = os.environ.get('API_HASH', None)
+    BOT_TOKEN = os.environ.get('BOT_TOKEN', None)
+    DATABASE_URL = os.environ.get('DATABASE_URL', None)
+    DATABASE_URL = DATABASE_URL.replace("postgres", "postgresql")  # Sqlalchemy dropped support for "postgres" name.
+    # https://stackoverflow.com/questions/62688256/sqlalchemy-exc-nosuchmoduleerror-cant-load-plugin-sqlalchemy-dialectspostgre
+    MUST_JOIN = os.environ.get('MUST_JOIN', None)
+    #if MUST_JOIN.startswith("@"):
+        #MUST_JOIN = MUST_JOIN.replace("@", "")
+else:
+    # Fill the Values
+    API_ID = 0
+    API_HASH = ""
+    BOT_TOKEN = ""
+    DATABASE_URL = ""
+    DATABASE_URL = DATABASE_URL.replace("postgres", "postgresql")
+    MUST_JOIN = ""
+    #if MUST_JOIN.startswith("@"):
+       # MUST_JOIN = MUST_JOIN[1:]
